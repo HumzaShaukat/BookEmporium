@@ -6,12 +6,12 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const findUser = await User.findOne({ _id: context.user._id }).select(
-          "__v"
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
         );
-        return findUser;
+        return userData;
       }
-      throw new AuthenticationError("Login Failed!");
+      throw new AuthenticationError("You are not logged in!");
     },
   },
 
@@ -22,16 +22,16 @@ const resolvers = {
       return { token, user };
     },
     login: async (parents, { email, password }) => {
-      const checkUser = await User.findOne({ email });
-      if (!checkUser) {
+      const user = await User.findOne({ email });
+      if (!user) {
         throw new AuthenticationError("User not found");
       }
-      const checkPassword = await checkUser.isCorrectPassword(password);
+      const checkPassword = await user.isCorrectPassword(password);
       if (!checkPassword) {
         throw new AuthenticationError("Incorrect password");
       }
-      const token = signToken(checkUser);
-      return { token, checkUser };
+      const token = signToken(user);
+      return { token, user };
     },
     addBook: async (parent, { bookData }, context) => {
       if (context.user) {

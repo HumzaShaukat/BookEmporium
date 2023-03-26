@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Jumbotron,
   Container,
@@ -33,16 +33,12 @@ const SavedBooks = () => {
       console.log(err);
     }
   };
-
-  if (loading) {
-    return <h2>LOADING...</h2>;
-  }
-
+  console.log(data);
   return (
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Viewing saved books!</h1>
+          {loading ? <h1>Loading...</h1> : <h1>Viewing saved books!</h1>}
         </Container>
       </Jumbotron>
       <Container>
@@ -54,7 +50,7 @@ const SavedBooks = () => {
             : "You have no saved books!"}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData.savedBooks?.map((book) => {
             return (
               <Card key={book.bookId} border="dark">
                 {book.image ? (

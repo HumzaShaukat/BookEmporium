@@ -44,10 +44,6 @@ const SearchBooks = () => {
         `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
       );
 
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
-
       const { items } = await response.json();
 
       const bookData = items.map((book) => ({
@@ -81,7 +77,6 @@ const SearchBooks = () => {
       const { data } = await addBook({
         variables: { bookData: { ...bookToSave } },
       });
-      setSavedBookIds([...saveBookIds, bookToSave.bookId]);
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
