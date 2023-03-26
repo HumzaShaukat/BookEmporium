@@ -10,7 +10,7 @@
     "start": "node server/server.js && cd ./bookemporium && npm start",
     "develop": "concurrently \"cd server && npm run watch\" \"cd bookemporium && npm start\"",
     "install": "cd server && npm i && cd ../bookemporium && npm i",
-    "build": "cd client && npm run build"
+    "build": "cd bookemporium && npm run build"
   },
   "keywords": [],
   "author": "",
