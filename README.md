@@ -10,7 +10,8 @@ Begin by signing up for an account by clicking the Login/Signup button. A modal 
 
 ## Demo
 
-Here is a ![screenshot](./assets/screenshot.jpg) of the deployed website and a [link]() to the deployed page.
+Here is a screenshot of the deployed website and a [link](https://serene-savannah-16976.herokuapp.com/) to the deployed page.
+![image](./assets/screenshot.jpg)
 
 ## Credits
 
