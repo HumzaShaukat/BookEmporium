@@ -8,13 +8,13 @@ import {
 } from "react-bootstrap";
 
 import { useQuery, useMutation } from "@apollo/client";
-import { ME_QUERY } from "../utils/queries";
+import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 import { REMOVE_BOOK } from "../utils/mutations";
 
 const SavedBooks = () => {
-  const { loading, data } = useQuery(ME_QUERY);
+  const { loading, data } = useQuery(GET_ME);
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
   const userData = data?.me || {};
 
@@ -33,12 +33,14 @@ const SavedBooks = () => {
       console.log(err);
     }
   };
-  console.log(data);
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
   return (
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          {loading ? <h1>Loading...</h1> : <h1>Viewing saved books!</h1>}
+          <h1>Viewing saved books!</h1>
         </Container>
       </Jumbotron>
       <Container>
